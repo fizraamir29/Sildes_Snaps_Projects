@@ -174,14 +174,15 @@ public class SlideSnap extends JFrame {
     }
 
     private void updateGrid() {
-        getContentPane().removeAll();
         JPanel gamePanel = new JPanel(new GridLayout(gridSize, gridSize));
         for (JButton tile : tiles) {
             gamePanel.add(tile);
         }
-        add(gamePanel, BorderLayout.CENTER);
-        setupUI(); // Set up other UI components
+        getContentPane().add(gamePanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
+    
 
     private boolean isPuzzleSolved() {
         for (int i = 0; i < tiles.size() - 1; i++) {
