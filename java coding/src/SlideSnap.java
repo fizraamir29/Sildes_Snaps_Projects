@@ -212,14 +212,10 @@ public class SlideSnap extends JFrame {
 
     private void shuffleTiles() {
         Random rand = new Random();
-        int shuffleCount = gridSize * gridSize * 10; // More shuffling for more difficulty
-        for (int i = 0; i < shuffleCount; i++) {
-            int randomTileIndex = rand.nextInt(tiles.size());
-            if (isAdjacent(randomTileIndex, emptyIndex)) {
-                Collections.swap(tiles, randomTileIndex, emptyIndex);
-                emptyIndex = randomTileIndex;
-            }
-        }
+        do {
+            Collections.shuffle(tiles);
+            emptyIndex = tiles.size() - 1;
+        } while (!isSolvable()); // Ensures the puzzle is solvable after shuffling
     }
 
     private void restartGame() {
